@@ -15,8 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import blog
+from .views import blog, category
 
 urlpatterns = [
-    path('blog/', blog, name='blog')
+    path('', blog, name='blog'),
+    path('category/<int:category_id>/', category, name='category'),
 ]

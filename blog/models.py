@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+ 
     def __str__(self):
         return self.name
     
@@ -23,6 +23,6 @@ class Post(models.Model):
     publish_time = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to='posts/', null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    categories = models.ManyToManyField(Category, related_name='posts')
+    categories = models.ManyToManyField(Category, related_name='get_posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)    
