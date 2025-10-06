@@ -15,7 +15,7 @@
     <link href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Fuentes -->
-    <link href="{% static 'core/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet' %}" type="text/css">
+    <link href="{% static 'core/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
@@ -73,37 +73,42 @@
     <!-- Pié de página -->
     <footer class="footer text-faded text-center py-5">
       <div class="container">
-
-        {% if LINK_X %}
         <p class="m-0">
+          {% if LINK_X %}
 	        <a href="{{LINK_X}}" class="link">
 	          <span class="fa-stack fa-lg">
 	            <i class="fa fa-circle fa-stack-2x"></i>
 	            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
 	          </span>
 	        </a>
-        {% endif %}
-        {% if LINK_Y %}
-          <a href="#" class="link">
-	          <span class="fa-stack fa-lg">
-	            <i class="fa fa-circle fa-stack-2x"></i>
-	            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-	          </span>
-	        </a>
-        {% endif %}
-        {% if LINK_Z %}
-          <a href="{{LINK_Z}}" class="link">
+          {% endif %}
+        {% if LINK_INSTAGRAM %}
+          <a href="{{LINK_INSTAGRAM}}" class="link">
 	          <span class="fa-stack fa-lg">
 	            <i class="fa fa-circle fa-stack-2x"></i>
 	            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
 	          </span>
 	        </a>
+        {% endif %}
+        {% if LINK_LINKEDIN %}
+          <a href="{{LINK_LINKEDIN}}" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+        {% endif %}
 	    </p>
-        <p class="m-0 mbt">
-        	<a href="{% url 'sample' %}" class="link">Política de privacidad</a> ·
-        	<a href="{% url 'sample' %}" class="link">Aviso legal</a> ·
-        	<a href="{% url 'sample' %}" class="link">Cookies</a>
-		</p>
+        <p class="m-0 mb-2">
+          <!-- <a href="" class="link">Política de privacidad</a> · 
+          <a href="" class="link">Aviso legal</a> ·
+          <a href="" class="link">Cookies</a>  -->
+            {% load pages_extras %}
+            {% get_all_pages as all_pages %}
+            {% for page in all_pages %}
+             <a href="{% url 'pages' page.id %}" class="link">{{ page.title }}</a> {% if not forloop.last %} · {% endif %}
+            {% endfor %}
+         </p>
         <p class="m-0 mbt1">&copy; La Caffettiera 2018</p>
       </div>
 	</footer>
