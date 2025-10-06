@@ -55,7 +55,7 @@
             <li class="nav-item {% if request.path == '/contact/' %} active {% endif %} px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="{% url 'contact' %}">Contacto</a>
             </li>
-            <li class="nav-item {% if request.path == '/blog/' %} active {% endif %} px-lg-4">
+            <li class="nav-item {% if request.path|slice:":6" == '/blog/' %} active {% endif %} px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}">Blog</a>
             </li>
           </ul>
@@ -73,20 +73,26 @@
     <!-- Pié de página -->
     <footer class="footer text-faded text-center py-5">
       <div class="container">
+
+        {% if LINK_X %}
         <p class="m-0">
-	        <a href="#" class="link">
+	        <a href="{{LINK_X}}" class="link">
 	          <span class="fa-stack fa-lg">
 	            <i class="fa fa-circle fa-stack-2x"></i>
 	            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
 	          </span>
 	        </a>
-	        <a href="#" class="link">
+        {% endif %}
+        {% if LINK_Y %}
+          <a href="#" class="link">
 	          <span class="fa-stack fa-lg">
 	            <i class="fa fa-circle fa-stack-2x"></i>
 	            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
 	          </span>
 	        </a>
-	        <a href="#" class="link">
+        {% endif %}
+        {% if LINK_Z %}
+          <a href="{{LINK_Z}}" class="link">
 	          <span class="fa-stack fa-lg">
 	            <i class="fa fa-circle fa-stack-2x"></i>
 	            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
