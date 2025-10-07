@@ -1,9 +1,10 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 class Page(models.Model):
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = RichTextField()
+    order = models.SmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -13,4 +14,4 @@ class Page(models.Model):
     class Meta:
         verbose_name = "Page"
         verbose_name_plural = "Pages"
-        ordering = ['title']
+        ordering = ['order', 'title']
