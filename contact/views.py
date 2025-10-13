@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.core.mail import EmailMessage, send_mail
 from .forms import ContactForm
 
 # Create your views here.
@@ -13,8 +14,19 @@ def contact(request):
             email = request.POST.get('email', '')
             content = request.POST.get('content', '')
 
-            return redirect(reverse('contact') + '?ok')
-
+            email = EmailMessage(
+                "New contact form submission",
+                "Name: {}\nEmail: {}\n\nMessage:\n\n{}".format(name, email, content),
+                "no-reply@blabla.com",
+                ["maildeprueba@prueba.com"],
+                reply_to=[email]
+            )
+            try:
+                email.send(fail_silently=False)
+                return redirect(reverse('contact') + '?ok')
+            except:
+                return redirect(reverse('contact') + '?fail')
+            
 
 
     return render(request, 'contact/contact.html', {'form': contact_form}) # Pasamos el formulario a la plantilla

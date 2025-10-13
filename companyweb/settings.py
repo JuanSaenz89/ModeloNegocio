@@ -147,3 +147,5 @@ CKEDITOR_CONFIGS = {
         ],
     }
 }
+
+# Email configuration
